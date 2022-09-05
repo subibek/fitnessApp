@@ -5,19 +5,51 @@ import 'package:project/helper/appcolors.dart';
 import 'package:project/login/signUpPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/pages/categorylistpage.dart';
+import 'package:project/widgets/custom_page_route.dart';
 import 'package:provider/provider.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../mainPage.dart';
+import '../theme/theme_provider.dart';
 import '../widgets/iconfont.dart';
+
+SharedPreferences? preferences;
 
 class LoginPage extends StatefulWidget {
 
+
   static String? currentUser;
+
+  static Future setUser(bool isLoggedIn) async {
+    preferences!.setBool("IsLoggedIn", isLoggedIn);
+  }
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  Future getTheme() async {
+    preferences = await SharedPreferences.getInstance();
+    bool? isDark = preferences!.getBool('theme');
+    final provider = Provider.of<ThemeProvider>(context, listen: false);
+    provider.toggleTheme(isDark!);
+  }
+
+  Future getUser() async {
+    preferences = await SharedPreferences.getInstance();
+    bool? isLoggedIn = preferences!.getBool('IsLoggedIn');
+
+    if (isLoggedIn!){
+      Navigator.of(context).push(CustomPageRoute(routePage: MainPage()));
+    }
+
+  }
+
+  void initState(){
+    getTheme();
+    getUser();
+  }
 
   final _username = TextEditingController();
   final _password = TextEditingController();
@@ -31,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
     _password.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
 
@@ -93,6 +126,9 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 4),
                     error,
                     SizedBox(height: 4),
+                    Container(
+                      child: isLoading ? Column(children: [CircularProgressIndicator(color: AppColors.main_color,), SizedBox(height: 10,)],) : null ,
+                    ),
                     InkWell(
                       onTap: () async {
                         String uid = _username.text;
@@ -117,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
                         }
                       },
-                      child: isLoading ? Column(children: [CircularProgressIndicator(color: AppColors.main_color,), SizedBox(height: 10,)],) :
+                      child:
                       Container(
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.symmetric(vertical: 13,),
@@ -141,6 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 6),
                     InkWell(
                       onTap: () {
+                        LoginPage.setUser(true);
                         Navigator.push(context,
                           MaterialPageRoute(builder: (context) => SignUpPage()),
                         );

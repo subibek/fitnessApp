@@ -30,9 +30,15 @@ class _ResultPageState extends State<ResultPage> {
 
     Color dialogBgColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white12 : Colors.white70;
     Color txtColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white : Colors.black87;
-    Color tileColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.black87 : Colors.white12;
+    Color foregroundColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white: Colors.black87;
+    Color tileColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.black87 : Colors.grey;
+    Color dialogColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.black87 : Colors.white12;
+    Color scaffoldColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.black87 : Colors.transparent;
+
+
 
     return Scaffold(
+      appBar: AppBar(backgroundColor: scaffoldColor, foregroundColor: foregroundColor),
         body: ListView(
           children: [
             Center(
@@ -89,18 +95,17 @@ class _ResultPageState extends State<ResultPage> {
                               height: 200,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white70
                               ),
                               padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
                               child: Center(
                                 child: Column(
                                   children: [
-                                    Text('BMI Scale Categories:',style: TextStyle(fontSize: 20)),
+                                    Text('BMI Scale Categories:',style: TextStyle(fontSize: 20,color: txtColor)),
                                     SizedBox(height: 10,),
-                                    Text('Underweight = < 18.5',style: TextStyle(fontSize: 17)),
-                                    Text('Normal weight = 18.5 – 24.9',style: TextStyle(fontSize: 17)),
-                                    Text('Overweight = 25 – 29.9',style: TextStyle(fontSize: 17)),
-                                    Text('Obese = 30 or greater',style: TextStyle(fontSize: 17))
+                                    Text('Underweight = < 18.5',style: TextStyle(fontSize: 17,color: txtColor)),
+                                    Text('Normal weight = 18.5 – 24.9',style: TextStyle(fontSize: 17,color: txtColor)),
+                                    Text('Overweight = 25 – 29.9',style: TextStyle(fontSize: 17,color: txtColor)),
+                                    Text('Obese = 30 or greater',style: TextStyle(fontSize: 17,color: txtColor))
                                   ],
                                 ),
                               )
@@ -124,7 +129,7 @@ class _ResultPageState extends State<ResultPage> {
                   onTap: (){
                     showDialog(context: context,
                         builder:(context) => Dialog(
-                            backgroundColor: Colors.white,
+                            backgroundColor: dialogColor,
                             insetPadding: EdgeInsets.all(10),
                             child: Stack(
                               alignment: Alignment.center,
@@ -134,14 +139,14 @@ class _ResultPageState extends State<ResultPage> {
                                     height: 200,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color: Colors.white70
+                                        color: dialogColor
                                     ),
                                     padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
                                     child: Center(
                                       child: Column(
                                         children: [
                                           Text('Total Daily Energy Expenditure (TDEE) is an estimation of how many calories you '
-                                              'burn per day when exercise is taken into account.',style: TextStyle(fontSize: 17)),
+                                              'burn per day when exercise is taken into account.',style: TextStyle(fontSize: 17,color: txtColor)),
                                         ],
                                       ),
                                     )
@@ -165,7 +170,7 @@ class _ResultPageState extends State<ResultPage> {
                   onTap: (){
                     showDialog(context: context,
                         builder:(context) => Dialog(
-                            backgroundColor: Colors.white,
+                            backgroundColor: dialogColor,
                             insetPadding: EdgeInsets.all(10),
                             child: Stack(
                               alignment: Alignment.center,
@@ -175,14 +180,14 @@ class _ResultPageState extends State<ResultPage> {
                                     height: 200,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color: Colors.white70
+                                        color: dialogColor
                                     ),
                                     padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
                                     child: Center(
                                       child: Column(
                                         children: [
                                           Text('The Goal Calorie is an estimate of the number of calories needed each day to maintain, lose, or gain weight'
-                                          ,style: TextStyle(fontSize: 17),),
+                                          ,style: TextStyle(fontSize: 17,color: txtColor),),
                                         ],
                                       ),
                                     )

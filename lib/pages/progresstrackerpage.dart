@@ -122,7 +122,7 @@ class _ProgressTrackerState extends State<ProgressTracker> {
 
   getData() {
 
-    FirebaseFirestore.instance.collection(currentUser!).get()
+    FirebaseFirestore.instance.collection(currentUser!).orderBy("date").get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         Map<String, dynamic> val = result.data();

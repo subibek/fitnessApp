@@ -31,6 +31,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget build(BuildContext context) {
 
     return Drawer(
+      backgroundColor: Theme.of(context).primaryColor == Colors.black54
+          ? Colors.black54 : Colors.white,
       child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -44,8 +46,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   Widget buildHeader (BuildContext context) => Material(
-    color: Theme.of(context).primaryColor == Colors.black54
-        ? Colors.black54 : Colors.white,
     child: InkWell(
       onTap: (){
       },
@@ -96,6 +96,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           leading: const Icon(Icons.exit_to_app),
           title: const Text('Log Out'),
           onTap: (){
+            LoginPage.setUser(false);
             LoginPage.currentUser = '';
             Navigator.pushReplacement(
                 context,

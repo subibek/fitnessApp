@@ -13,12 +13,9 @@ import 'package:project/widgets/iconfont.dart';
 import 'package:project/widgets/mainappbar.dart';
 import 'package:project/widgets/navigationdrawer.dart';
 import 'package:project/widgets/custom_page_route.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 import '../theme/theme_provider.dart';
-
-SharedPreferences? preferences;
 
 class CategoryListPage extends StatefulWidget {
 
@@ -27,17 +24,6 @@ class CategoryListPage extends StatefulWidget {
 }
 
 class _CategoryListPageState extends State<CategoryListPage> {
-
-  Future getTheme() async {
-    preferences = await SharedPreferences.getInstance();
-    bool? isDark = preferences!.getBool('theme');
-    final provider = Provider.of<ThemeProvider>(context, listen: false);
-    provider.toggleTheme(isDark!);
-  }
-
-  void initState(){
-    getTheme();
-  }
 
 
   List<Category> categories = Utils.getMockedCategories();

@@ -19,11 +19,18 @@ class CalorieCounterHomePage extends StatefulWidget {
 
 class _CalorieCounterHomePageState extends State<CalorieCounterHomePage> {
 
+
   @override
   Widget build(BuildContext context) {
+
+    Color scaffolBgColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.black87 : Colors.white;
+    Color txtColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white70 : Colors.black87;
+
+
     return Scaffold(
+      backgroundColor: scaffolBgColor,
       appBar: AppBar(
-        title: Text('Search Food'),
+        title: Text('Search Food',style: TextStyle(color: txtColor),),
           centerTitle: true,
         actions: [
           IconButton(
@@ -37,7 +44,6 @@ class _CalorieCounterHomePageState extends State<CalorieCounterHomePage> {
     },
           )
         ],
-    backgroundColor: AppColors.main_color,
       ),
     );
   }
@@ -165,49 +171,54 @@ class FoodSearch extends SearchDelegate<String> {
       }
   );
 
-  Widget buildResultSuccess(SearchResults food, BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-  ),
-          child: ListView(
+  Widget buildResultSuccess(SearchResults food, BuildContext context) {
+
+    Color bgColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.black87 : Colors.white;
+    Color txtColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white70 : Colors.black87;
+
+    return Container(
+        decoration: BoxDecoration(
+          color: bgColor,
+        ),
+        child: ListView(
             padding: EdgeInsets.all(24),
             children: [
-            Text(
-              food.description,
-            style: TextStyle(
-            fontSize: 33,
-            color: AppColors.main_color,
-            ),
-            textAlign: TextAlign.center,
-            ),
-              SizedBox(height:44),
+              Text(
+                food.description,
+                style: TextStyle(
+                  fontSize: 33,
+                  color: txtColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 44),
               Text(
                 'Calories per 100g: ',
                 style: TextStyle(
                   fontSize: 20,
-                  color: AppColors.main_color,
+                  color: txtColor,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Text(
                 food.foodNutrients[0].amount + " cal",
                 style: TextStyle(
                   fontSize: 20,
-                  color: AppColors.main_color,
+                  color: txtColor,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height:44),
+              SizedBox(height: 44),
               Text(
                 'Enter serving size (in gm):',
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.main_color,
+                  color: txtColor,
                 ),
                 textAlign: TextAlign.left,
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               TextFormField(
                 controller: value,
                 keyboardType: TextInputType.number,
@@ -217,17 +228,25 @@ class FoodSearch extends SearchDelegate<String> {
                     border: OutlineInputBorder()
                 ),
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: bgColor,
+                ),
                   onPressed: () async {
                     double data;
-                    if (value.text.isEmpty){
+                    if (value.text.isEmpty) {
                       data = 100;
                     }
-                    else
-                      {data = double.parse(value.text);}
-                    double cal = ((double.parse(food.foodNutrients[0].amount))/100*data);
-                  addFoodDetails(username: currentUser, name: food.description, calories: cal, per100: double.parse(food.foodNutrients[0].amount));
+                    else {
+                      data = double.parse(value.text);
+                    }
+                    double cal = ((double.parse(food.foodNutrients[0].amount)) /
+                        100 * data);
+                    addFoodDetails(username: currentUser,
+                        name: food.description,
+                        calories: cal,
+                        per100: double.parse(food.foodNutrients[0].amount));
                     int count = 0;
                     Navigator.of(context).popUntil((_) => count++ >= 2);
                   },
@@ -235,16 +254,17 @@ class FoodSearch extends SearchDelegate<String> {
                     padding: EdgeInsets.all(14),
                     child: Text('Add Food', style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.main_color,
+                      color: txtColor,
                     ),
                     ),
                   )
-                  ),
+              ),
 
 
-      ]
-    )
-  );
+            ]
+        )
+    );
+  }
   }
 
 

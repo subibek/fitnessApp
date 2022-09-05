@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-SharedPreferences? preferences;
+import '../login/loginPage.dart';
+
+
 
 class ThemeProvider extends ChangeNotifier{
 
@@ -26,11 +26,13 @@ class MyThemes{
     scaffoldBackgroundColor: Colors.black87,
     colorScheme: ColorScheme.dark(),
     primaryColor: Colors.black54,
+    fontFamily: 'Lobster'
   );
 
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey[300],
     colorScheme: ColorScheme.light(),
     primaryColor: Colors.white,
+      fontFamily: 'Lobster'
   );
 }

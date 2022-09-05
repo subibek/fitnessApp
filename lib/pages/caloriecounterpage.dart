@@ -35,7 +35,7 @@ class _CalorieCounterState extends State<CalorieCounter> {
   Widget build(BuildContext context) {
     getGoalCal();
     final btnColor = Theme.of(context).primaryColor == Colors.black54
-        ? Colors.white : Colors.black;
+        ? Colors.white60 : Colors.black;
 
     final txtColor = Theme.of(context).primaryColor == Colors.black54
         ? Colors.black : Colors.white;

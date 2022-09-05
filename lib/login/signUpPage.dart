@@ -83,7 +83,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       SizedBox(height: 10,),
                       TextFormField(
-                        validator: (email)=> email!.isEmpty ? 'Enter a valid email address': null,
+                        validator: (email){
+                          if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email!)){
+                            return 'Enter a valid email address';
+                          }
+                          else
+                            return null;
+                        },
+
                         controller: _email,
 
                         style: TextStyle(
@@ -200,6 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             if (docExists){
                               setState(() => error = Text('Username already exists. Please try another',
                                   style: TextStyle(color: Colors.red, fontSize: 14) ),  );
+                              isLoading = false;
                             }
                             else {
                               addUser();

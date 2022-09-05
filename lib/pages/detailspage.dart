@@ -19,8 +19,8 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Color tileColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white24 : Colors.black87;
-    Color txtColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white70 : Colors.black87;
+    Color tileColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white10 : Colors.white70;
+    Color txtColor = Theme.of(context).primaryColor == Colors.black54 ? Colors.white70 : Colors.white70;
 
     return Scaffold(
       appBar: MainAppBar(),
